@@ -92,13 +92,23 @@ The tests treat the `UpsService` as a black box but replace the network layer (`
 
 ## Setup & Running
 
-### Prerequisites
-
-- [Bun](https://bun.sh) runtime is required.
+This project is compatible with **Node.js** (v18+) and **Bun**.
 
 ### Installation
 
+Choose your preferred package manager:
+
 ```bash
+# npm
+npm install
+
+# yarn
+yarn install
+
+# pnpm
+pnpm install
+
+# bun
 bun install
 ```
 
@@ -114,9 +124,19 @@ Fill in the `UPS_CLIENT_ID` and `UPS_CLIENT_SECRET`. (For running tests, these c
 
 ### Running Tests
 
-To execute the integration test suite:
+We use **Vitest** conventions. You can run tests using:
 
 ```bash
+# npm
+npm test
+
+# yarn
+yarn test
+
+# pnpm
+pnpm test
+
+# bun
 bun test
 ```
 
