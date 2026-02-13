@@ -1,10 +1,14 @@
 import { ErrorCodes } from "../../constants/error-codes";
-import type { CarrierService, RateRequest, RateResponse } from "../../domain/types";
+import type {
+  CarrierService,
+  RateRequest,
+  RateResponse,
+} from "../../domain/types";
 import { rateRequestSchema } from "../../domain/validation";
-import { failure, success,  type Result } from "../../utils/results";
+import { failure, success, type Result } from "../../utils/results";
 import { UpsAuth, type UpsAuthConfig } from "./auth";
 import { UpsMapper } from "./mapper";
-import { CarrierError, ValidationError } from "../../errors";
+import { CarrierError, ValidationError, AuthError } from "../../errors";
 import type { UPSRateRequest, UPSRateResponse } from "./dto";
 
 export class UpsService implements CarrierService {
@@ -39,6 +43,13 @@ export class UpsService implements CarrierService {
       if (error instanceof ValidationError) {
         return failure(
           ErrorCodes.VALIDATION_ERROR.code,
+          error.message,
+          error.details,
+        );
+      }
+      if (error instanceof AuthError) {
+        return failure(
+          ErrorCodes.AUTH_FAILED.code,
           error.message,
           error.details,
         );
