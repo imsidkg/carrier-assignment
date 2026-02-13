@@ -1,5 +1,6 @@
 import { z } from "zod";
 import * as schemas from "./validation";
+import type { Result } from "../utils/results";
 
 export type WeightUnit = z.infer<typeof schemas.weightUnitSchema>;
 export type DimensionUnit = z.infer<typeof schemas.dimensionUnitSchema>;
@@ -10,5 +11,5 @@ export type Rate = z.infer<typeof schemas.rateSchema>;
 export type RateResponse = z.infer<typeof schemas.rateResponseSchema>;
 
 export interface CarrierService {
-  getRates(request: RateRequest): Promise<RateResponse>;
+  getRates(request: RateRequest): Promise<Result<RateResponse>>;
 }
