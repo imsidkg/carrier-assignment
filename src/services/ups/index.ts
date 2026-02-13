@@ -54,6 +54,13 @@ export class UpsService implements CarrierService {
           error.details,
         );
       }
+      if (error instanceof CarrierError) {
+        return failure(
+          ErrorCodes.CARRIER_ERROR.code,
+          error.message,
+          error.details,
+        );
+      }
       return failure(
         ErrorCodes.CARRIER_ERROR.code,
         error.message || "Unknown Carrier Error",
